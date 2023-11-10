@@ -1,5 +1,5 @@
 package com.tyss.happyhome.dao;
 
-public class Users {
+public class Userdao {
 
 }
