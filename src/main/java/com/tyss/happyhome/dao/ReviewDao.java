@@ -5,24 +5,34 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.tyss.happyhome.Repository.HappyHomeReviewRepository;
 import com.tyss.happyhome.entity.Review;
 
-@Repository
+//@Repository
+@RestController
 public class ReviewDao {
 	
 	@Autowired
 	private HappyHomeReviewRepository reviewRepository;
 	
 	//method to save review
-	public Review saveReview(Review review)
+	@PostMapping("/save1")
+	public Review saveReview(@RequestBody Review review)
 	{
 		return reviewRepository.save(review);
 	}
 	
 	//method to get review based on id
-	public Review getReviewById(int id)
+	@GetMapping("/get1/{id}")
+	public Review getReviewById(@PathVariable int id)
 	{
 		Optional<Review> opt = reviewRepository.findById(id);
 		if(opt.isPresent())
@@ -33,6 +43,7 @@ public class ReviewDao {
 	}
 	
 	//method to get list of reviews
+	@GetMapping("/getAll1")
 	public List<Review> getAllReviews()
 	{
 		List<Review> list = reviewRepository.findAll();
@@ -40,13 +51,15 @@ public class ReviewDao {
 	}
 	
 	//method to update review
-	public Review updateReview(Review review)
+	@PutMapping("/update1")
+	public Review updateReview(@RequestBody Review review)
 	{
 		return reviewRepository.save(review);
 	}
 	
 	//method to delete review based on id
-	public String deleteReviewById(int id)
+	@DeleteMapping("/delete1")
+	public String deleteReviewById(@PathVariable int id)
 	{
 		Optional<Review> opt = reviewRepository.findById(id);
 		if(opt.isPresent())

@@ -83,7 +83,7 @@ public class UsersDao {
 	}
 	
 	//method to delete user based on id
-	@DeleteMapping("/delete")
+	@DeleteMapping("/delete/{id}")
 	public String deleteReviewById(@PathVariable int id)
 	{
 		Optional<Users> opt = userRepository.findById(id);
@@ -91,7 +91,7 @@ public class UsersDao {
 		{
 			Users us = opt.get();
 			userRepository.delete(us);
-			return "User id: "+id+"deleted successfully";
+			return "User id: "+id+" deleted successfully";
 		}
 		return "No record found to delete";
 	}
