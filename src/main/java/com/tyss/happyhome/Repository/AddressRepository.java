@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.tyss.happyhome.entity.Address;
 
-public interface HappyHomeAddressRepository  extends JpaRepository<Address, Integer>{
+public interface AddressRepository  extends JpaRepository<Address, Integer>{
 
 }
