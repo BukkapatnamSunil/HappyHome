@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
+
 //LAMBOK ANNOTATIONS FOR GETTERS AND SETTERS
 @Setter
 @Getter

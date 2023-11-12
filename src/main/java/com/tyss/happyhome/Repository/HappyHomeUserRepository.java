@@ -7,5 +7,6 @@ import com.tyss.happyhome.entity.Users;
 
 @Component
 public interface HappyHomeUserRepository extends JpaRepository<Users, Integer>{
+	
 	Users findByEmail(String email);
-}
+} 
