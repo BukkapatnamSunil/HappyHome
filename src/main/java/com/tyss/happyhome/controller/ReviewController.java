@@ -49,7 +49,7 @@ public class ReviewController {
 	}
 	
 	@DeleteMapping("/deleteReview/{id}")
-	public ResponseEntity<ResponseStructure<String>> deleteReviewById(int id)
+	public ResponseEntity<ResponseStructure<String>> deleteReviewById(@PathVariable int id)
 	{
 		return reviewService.deleteReviewById(id);
 	}
