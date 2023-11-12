@@ -17,23 +17,20 @@ import com.tyss.happyhome.Repository.HappyHomeUserRepository;
 import com.tyss.happyhome.entity.Service;
 import com.tyss.happyhome.entity.Users;
 
-//@Repository
-@RestController
+@Repository
 public class UsersDao {
 	
 	@Autowired
 	private HappyHomeUserRepository userRepository;
 	
 	//method to save user
-	@PostMapping("/save")
-	public Users saveUser(@RequestBody Users users)
+	public Users saveUser(Users users)
 	{
 		return userRepository.save(users);
 	}
 	
 	//method to get user based on id
-	@GetMapping("/getid/{id}")
-	public Users getUserById(@PathVariable int id)
+	public Users getUserById(int id)
 	{
 		Optional<Users> opt = userRepository.findById(id);
 		if(opt.isPresent())
@@ -44,8 +41,7 @@ public class UsersDao {
 	}
 	
 	//method to get user based on email
-	@GetMapping("/getemail/{email}")
-	public Users findByEmail(@PathVariable String email)
+	public Users findByEmail(String email)
 	{
 		Users user = userRepository.findByEmail(email);
 		if(user!=null)
@@ -56,7 +52,6 @@ public class UsersDao {
 	}
 	
 	//method to get list of users
-	@GetMapping("/getAll")
 	public List<Users> getAllUsers()
 	{
 		List<Users> list = userRepository.findAll();
@@ -76,15 +71,13 @@ public class UsersDao {
 //	}
 	
 	//method to update user
-	@PutMapping("/update")
-	public Users updateUser(@RequestBody Users user)
+	public Users updateUser(Users user)
 	{
 		return userRepository.save(user);
 	}
 	
 	//method to delete user based on id
-	@DeleteMapping("/delete/{id}")
-	public String deleteReviewById(@PathVariable int id)
+	public String deleteUserById(int id)
 	{
 		Optional<Users> opt = userRepository.findById(id);
 		if(opt.isPresent())

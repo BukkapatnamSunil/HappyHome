@@ -24,15 +24,13 @@ public class ReviewDao {
 	private HappyHomeReviewRepository reviewRepository;
 	
 	//method to save review
-	@PostMapping("/save1")
-	public Review saveReview(@RequestBody Review review)
+	public Review saveReview(Review review)
 	{
 		return reviewRepository.save(review);
 	}
 	
 	//method to get review based on id
-	@GetMapping("/get1/{id}")
-	public Review getReviewById(@PathVariable int id)
+	public Review getReviewById(int id)
 	{
 		Optional<Review> opt = reviewRepository.findById(id);
 		if(opt.isPresent())
@@ -43,7 +41,6 @@ public class ReviewDao {
 	}
 	
 	//method to get list of reviews
-	@GetMapping("/getAll1")
 	public List<Review> getAllReviews()
 	{
 		List<Review> list = reviewRepository.findAll();
@@ -51,15 +48,13 @@ public class ReviewDao {
 	}
 	
 	//method to update review
-	@PutMapping("/update1")
-	public Review updateReview(@RequestBody Review review)
+	public Review updateReview(Review review)
 	{
 		return reviewRepository.save(review);
 	}
 	
 	//method to delete review based on id
-	@DeleteMapping("/delete1")
-	public String deleteReviewById(@PathVariable int id)
+	public String deleteReviewById(int id)
 	{
 		Optional<Review> opt = reviewRepository.findById(id);
 		if(opt.isPresent())

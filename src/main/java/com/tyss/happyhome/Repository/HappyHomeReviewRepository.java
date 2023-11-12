@@ -7,5 +7,5 @@ import com.tyss.happyhome.entity.Review;
 
 @Component
 public interface HappyHomeReviewRepository extends JpaRepository<Review, Integer>{
-
+	
 }
