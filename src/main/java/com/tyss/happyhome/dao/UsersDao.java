@@ -6,14 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tyss.happyhome.Repository.HappyHomeUserRepository;
+import com.tyss.happyhome.Repository.HappyHomeUsersRepository;
 import com.tyss.happyhome.entity.Users;
 
 @Repository
 public class UsersDao {
-	
 	@Autowired
-	private HappyHomeUserRepository userRepository;
+	private HappyHomeUsersRepository userRepository;
 	
 	//method to save user
 	public Users saveUser(Users users)
