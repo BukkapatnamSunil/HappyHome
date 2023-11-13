@@ -24,6 +24,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler{
 		responseStructure.setData("Not Found");
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
+
 	
 	@ExceptionHandler(PropertyTypeDoesnotFoundException.class)
 	public ResponseEntity<ResponseStructure<List<String>>> catchPropertyTypeDoesnotFoundException(PropertyTypeDoesnotFoundException doesnotFoundException){
@@ -33,6 +34,18 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler{
 		responseStructure.setData(null);
 		return new ResponseEntity<ResponseStructure<List<String>>>(responseStructure,HttpStatus.NOT_FOUND);
 	}
+
+
+	
+	@ExceptionHandler(EmailDoesNotFoundException.class)
+	public ResponseEntity<ResponseStructure<String>> catchEmailDoesNotPresentException(EmailDoesNotFoundException emailDoesNotFoundException)
+	{
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Not Found");
+		responseStructure.setData(null);
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+  }
 	@ExceptionHandler(NullPointerException.class)
 	public ResponseEntity<ResponseStructure<String>> handleNullPointerException()
 	{
