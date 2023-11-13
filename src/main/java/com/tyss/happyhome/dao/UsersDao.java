@@ -17,6 +17,7 @@ public class UsersDao {
 	//method to save user
 	public Users saveUser(Users users)
 	{
+		userRepository.save(users.getAddress());
 		return userRepository.save(users);
 	}
 	
@@ -68,6 +69,7 @@ public class UsersDao {
 	}
 	
 	//method to delete user based on id
+
 //	public String deleteUserById(int id)
 //	{
 //		Optional<Users> opt = userRepository.findById(id);
@@ -82,5 +84,23 @@ public class UsersDao {
 	
 	public void deleteUserById(int id) {
 		userRepository.deleteById(id);
+=======
+	public Optional<Users> deleteUserById(int id)
+	{
+		Optional<Users> opt = userRepository.findById(id);
+		//userRepository.deleteById(id);
+		if(opt.isPresent())
+		{
+			Users us = opt.get();
+			us.setAddress(null);
+			us.setList_document(null);
+			us.setList_property(null);
+			us.setList_service(null);
+			userRepository.deleteById(id);
+			
+			return opt;
+		}
+		return null;
+
 	}
 }

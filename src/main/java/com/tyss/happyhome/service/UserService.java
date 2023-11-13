@@ -1,6 +1,7 @@
 package com.tyss.happyhome.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -105,4 +106,53 @@ public class UserService {
 		}
 	}
 	
+
+    public ResponseEntity<ResponseStructure<List<Users>>> getAllUsers() {
+		
+        List<Users> users = userDao.getAllUsers();
+
+        ResponseStructure<List<Users>> responseStructure = new ResponseStructure<>();
+        responseStructure.setStatusCode(HttpStatus.OK.value());
+        responseStructure.setMessage("Reviews retrieved successfully");
+        responseStructure.setData(users);
+
+        return new ResponseEntity<ResponseStructure<List<Users>>>(responseStructure, HttpStatus.OK);
+    }
+    
+    public ResponseEntity<ResponseStructure<Users>> updateUser(Users user) {
+        
+        Users updated = userDao.updateUser(user);
+
+        ResponseStructure<Users> responseStructure = new ResponseStructure<Users>();
+        
+        if (updated != null) {
+            responseStructure.setStatusCode(HttpStatus.OK.value());
+            responseStructure.setMessage("User updated successfully");
+            responseStructure.setData(updated);
+            return new ResponseEntity<ResponseStructure<Users>>(responseStructure, HttpStatus.OK);
+        } else {
+            responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+            responseStructure.setMessage("Failed to update the user");
+            return new ResponseEntity<ResponseStructure<Users>>(responseStructure, HttpStatus.NOT_FOUND);
+        }
+    }
+    
+     public ResponseEntity<ResponseStructure<String>> deleteUserById(int id) {
+        
+        Optional<Users> deleted = userDao.deleteUserById(id);
+        
+        ResponseStructure<String> responseStructure = new ResponseStructure<>();
+
+        if (deleted!=null) {
+            responseStructure.setStatusCode(HttpStatus.OK.value());
+            responseStructure.setMessage("User deleted successfully");
+            responseStructure.setData("User with ID " + id + " has been deleted");
+            return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.OK);
+        } else {
+            responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+            responseStructure.setMessage("Failed to delete the user");
+            responseStructure.setData("User with ID " + id + " not found");
+            return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+        }
+    }
 }
