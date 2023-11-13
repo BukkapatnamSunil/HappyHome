@@ -1,4 +1,4 @@
-package com.tyss.happyhome.dao;
+package com.tyss.happyhome.Dao;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tyss.happyhome.Repository.HappyHomeAddressRepository;
 import com.tyss.happyhome.entity.Address;
-import com.tyss.happyhome.exception.Nullexception;
 @RestController
 public class AddressDao {
 	@Autowired
@@ -40,18 +39,16 @@ public class AddressDao {
 		return addressrepository.save(address);
 	}
 	//delete address
-	public Optional<Address> deleteAddressById(int id)
+	public String deleteAddressById(int id)
 	{
-		
 		Optional<Address> opt = addressrepository.findById(id);
 		if(opt.isPresent())
 		{
-			Address address = opt.get();
-			
-			addressrepository.deleteById(id);
-			return opt;
+			Address add = opt.get();
+			addressrepository.delete(add);
+			return "Address of "+id+" is being deleted successfully";
 		}
-	return  null;
+		return "No record found ";
 	}
 
 }

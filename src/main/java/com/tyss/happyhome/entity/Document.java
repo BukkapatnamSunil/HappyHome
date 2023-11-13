@@ -28,6 +28,7 @@ public class Document {
 	private String documnetType;
 	@Column(unique = true)
 	private String documnetNumber;
+
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date issueDate;

@@ -1,4 +1,4 @@
-package com.tyss.happyhome.dao;
+package com.tyss.happyhome.Dao;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,22 +37,21 @@ public class DocumentDao {
 		return list;
 	}
 	//delete document
-	public Optional<Document> deleteDocument(int id)
+	public String deleteDocument(int id)
 	{
 		Optional<Document> opt = documenetRepository.findById(id);
 		if(opt.isPresent())
 		{
 		Document add = opt.get();
 			documenetRepository.delete(add);
-			return opt;
+			return "Document of "+id+" is being deleted successfully";
 		}
-		return null;
+		return "No record found ";
 	}
 	//update Document
-		public Document updateDocument(Document document)
+		public Document updateAddress(Document document)
 		{
 			return documenetRepository.save(document);
 		}
-	
 
 }
