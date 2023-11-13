@@ -9,5 +9,9 @@ import com.tyss.happyhome.entity.Service;
 
 @Component
 public interface HappyHomeServicesRepository  extends JpaRepository<Service, Integer>{
+
+	List<Service> findByNameOfTheService(String nameOfService);
+
+	List<Service> findByAvailability(String availability);
 	
 }
