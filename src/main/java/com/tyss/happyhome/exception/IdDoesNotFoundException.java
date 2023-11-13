@@ -16,7 +16,7 @@ public class IdDoesNotFoundException extends RuntimeException{
 	@Override
 	public String getMessage() {
 		
-		return message;
+		return this.message;
 	}
 
 	

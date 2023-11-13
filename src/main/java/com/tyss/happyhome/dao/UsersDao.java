@@ -5,16 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.tyss.happyhome.Repository.HappyHomeUserRepository;
-import com.tyss.happyhome.entity.Service;
 import com.tyss.happyhome.entity.Users;
 
 @Repository
@@ -77,15 +69,19 @@ public class UsersDao {
 	}
 	
 	//method to delete user based on id
-	public String deleteUserById(int id)
-	{
-		Optional<Users> opt = userRepository.findById(id);
-		if(opt.isPresent())
-		{
-			Users us = opt.get();
-			userRepository.delete(us);
-			return "User id: "+id+" deleted successfully";
-		}
-		return "No record found to delete";
+//	public String deleteUserById(int id)
+//	{
+//		Optional<Users> opt = userRepository.findById(id);
+//		if(opt.isPresent())
+//		{
+//			Users us = opt.get();
+//			userRepository.delete(us);
+//			return "User id: "+id+" deleted successfully";
+//		}
+//		return "No record found to delete";
+//	}
+	
+	public void deleteUserById(int id) {
+		userRepository.deleteById(id);
 	}
 }

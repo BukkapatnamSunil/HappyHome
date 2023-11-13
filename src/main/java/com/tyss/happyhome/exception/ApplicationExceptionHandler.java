@@ -1,5 +1,7 @@
 package com.tyss.happyhome.exception;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,8 +20,17 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler{
 	{
 		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
 		responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
-		responseStructure.setMessage("Not Found");
-		responseStructure.setData(null);
+		responseStructure.setMessage(idDoesNotFoundException.getMessage());
+		responseStructure.setData("Not Found");
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(PropertyTypeDoesnotFoundException.class)
+	public ResponseEntity<ResponseStructure<List<String>>> catchPropertyTypeDoesnotFoundException(PropertyTypeDoesnotFoundException doesnotFoundException){
+		ResponseStructure<List<String>> responseStructure = new ResponseStructure<List<String>>();
+		responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage(doesnotFoundException.getMessage());
+		responseStructure.setData(null);
+		return new ResponseEntity<ResponseStructure<List<String>>>(responseStructure,HttpStatus.NOT_FOUND);
 	}
 }
