@@ -33,4 +33,15 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler{
 		responseStructure.setData(null);
 		return new ResponseEntity<ResponseStructure<List<String>>>(responseStructure,HttpStatus.NOT_FOUND);
 	}
+	@ExceptionHandler(NullPointerException.class)
+	public ResponseEntity<ResponseStructure<String>> handleNullPointerException()
+	{
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatusCode(HttpStatus.NOT_FOUND .value());
+		responseStructure.setMessage("Not data available");
+		responseStructure.setData(null);
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+
+
+	}
 }

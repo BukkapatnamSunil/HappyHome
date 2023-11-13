@@ -36,21 +36,22 @@ public class DocumentDao {
 		return list;
 	}
 	//delete document
-	public String deleteDocument(int id)
+	public Optional<Document> deleteDocument(int id)
 	{
 		Optional<Document> opt = documenetRepository.findById(id);
 		if(opt.isPresent())
 		{
 		Document add = opt.get();
 			documenetRepository.delete(add);
-			return "Document of "+id+" is being deleted successfully";
+			return opt;
 		}
-		return "No record found ";
+		return null;
 	}
 	//update Document
-		public Document updateAddress(Document document)
+		public Document updateDocument(Document document)
 		{
 			return documenetRepository.save(document);
 		}
+	
 
 }

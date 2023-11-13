@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tyss.happyhome.Repository.HappyHomeAddressRepository;
 import com.tyss.happyhome.entity.Address;
+import com.tyss.happyhome.exception.Nullexception;
 @RestController
 public class AddressDao {
 	@Autowired
@@ -39,16 +40,18 @@ public class AddressDao {
 		return addressrepository.save(address);
 	}
 	//delete address
-	public String deleteAddressById(int id)
+	public Optional<Address> deleteAddressById(int id)
 	{
+		
 		Optional<Address> opt = addressrepository.findById(id);
 		if(opt.isPresent())
 		{
-			Address add = opt.get();
-			addressrepository.delete(add);
-			return "Address of "+id+" is being deleted successfully";
+			Address address = opt.get();
+			
+			addressrepository.deleteById(id);
+			return opt;
 		}
-		return "No record found ";
+	return  null;
 	}
 
 }
