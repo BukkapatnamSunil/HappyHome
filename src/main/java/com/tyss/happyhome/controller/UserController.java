@@ -23,19 +23,19 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("/users")
+	@PostMapping("/userSave")
 	public ResponseEntity<ResponseStructure<Users>> saveUser(@RequestBody Users user)
 	{
 		return userService.saveUser(user);
 	}
 	
-	@GetMapping("/users/{id}")
+	@GetMapping("/usersId/{id}")
 	public ResponseEntity<ResponseStructure<Users>> getUserById(@PathVariable int id)
 	{
 		return userService.getUserById(id);
 	}
 	
-	@GetMapping("/users/{email}")
+	@GetMapping("/usersEmail/{email}")
 	public ResponseEntity<ResponseStructure<Users>> getEmployeeByEmail(@PathVariable String email)
 	{
 		return userService.findByEmail(email);
@@ -47,13 +47,13 @@ public class UserController {
 		return userService.getAllUsers();
 	}
 	
-	@PutMapping("/userUpdate")
+	@PutMapping("/usersUpdate")
 	public ResponseEntity<ResponseStructure<Users>> updateUser(@RequestBody Users user)
 	{
 		return userService.updateUser(user);
 	}
 	
-	@DeleteMapping("/deleteUser/{id}")
+	@DeleteMapping("/deleteUsers/{id}")
 	public ResponseEntity<ResponseStructure<String>> deleteUserById(@PathVariable int id)
 	{
 		return userService.deleteUserById(id);

@@ -5,17 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.tyss.happyhome.Repository.HappyHomeAddressRepository;
 import com.tyss.happyhome.Repository.HappyHomeUsersRepository;
-import com.tyss.happyhome.entity.Service;
 import com.tyss.happyhome.entity.Users;
 
 @Repository
@@ -26,6 +17,7 @@ public class UsersDao {
 	//method to save user
 	public Users saveUser(Users users)
 	{
+		userRepository.save(users.getAddress());
 		return userRepository.save(users);
 	}
 	
@@ -80,10 +72,16 @@ public class UsersDao {
 	public String deleteUserById(int id)
 	{
 		Optional<Users> opt = userRepository.findById(id);
+		//userRepository.deleteById(id);
 		if(opt.isPresent())
 		{
 			Users us = opt.get();
-			userRepository.delete(us);
+			us.setAddress(null);
+			us.setList_document(null);
+			us.setList_property(null);
+			us.setList_service(null);
+			userRepository.deleteById(id);
+			
 			return "User id: "+id+" deleted successfully";
 		}
 		return "No record found to delete";

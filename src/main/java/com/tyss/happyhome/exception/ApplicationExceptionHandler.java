@@ -22,4 +22,14 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler{
 		responseStructure.setData(null);
 		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler(EmailDoesNotFoundException.class)
+	public ResponseEntity<ResponseStructure<String>> catchEmailDoesNotPresentException(EmailDoesNotFoundException emailDoesNotFoundException)
+	{
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+		responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+		responseStructure.setMessage("Not Found");
+		responseStructure.setData(null);
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
+	}
 }

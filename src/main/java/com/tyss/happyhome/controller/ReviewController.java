@@ -24,13 +24,13 @@ public class ReviewController {
 	private ReviewService reviewService;
 	
 	
-	@PostMapping("/reviews")
+	@PostMapping("/reviewSave")
 	public ResponseEntity<ResponseStructure<Review>> saveReview(@RequestBody Review review)
 	{
 		return reviewService.saveReview(review);
 	}
 	
-	@GetMapping("/reviews/{id}")
+	@GetMapping("/reviewsId/{id}")
 	public ResponseEntity<ResponseStructure<Review>> getReview(@PathVariable int id)
 	{
 		return reviewService.getReviewById(id);

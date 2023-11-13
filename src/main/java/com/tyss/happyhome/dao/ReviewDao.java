@@ -60,6 +60,8 @@ public class ReviewDao {
 		if(opt.isPresent())
 		{
 			Review rev = opt.get();
+			rev.setList_services(null);
+			rev.setProperty(null);
 			reviewRepository.delete(rev);
 			return "Review"+id+"deleted successfully";
 		}
