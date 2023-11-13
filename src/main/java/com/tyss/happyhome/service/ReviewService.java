@@ -1,6 +1,7 @@
 package com.tyss.happyhome.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -84,7 +85,7 @@ public class ReviewService {
 	
 	public ResponseEntity<ResponseStructure<String>> deleteReviewById(int id) {
  
-        String deleted = reviewDao.deleteReviewById(id);
+        Optional<Review> deleted = reviewDao.deleteReviewById(id);
         
         ResponseStructure<String> responseStructure = new ResponseStructure<>();
 

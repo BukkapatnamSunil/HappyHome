@@ -69,7 +69,7 @@ public class UsersDao {
 	}
 	
 	//method to delete user based on id
-	public String deleteUserById(int id)
+	public Optional<Users> deleteUserById(int id)
 	{
 		Optional<Users> opt = userRepository.findById(id);
 		//userRepository.deleteById(id);
@@ -82,8 +82,8 @@ public class UsersDao {
 			us.setList_service(null);
 			userRepository.deleteById(id);
 			
-			return "User id: "+id+" deleted successfully";
+			return opt;
 		}
-		return "No record found to delete";
+		return null;
 	}
 }

@@ -1,6 +1,7 @@
 package com.tyss.happyhome.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -102,7 +103,7 @@ public class UserService {
     
      public ResponseEntity<ResponseStructure<String>> deleteUserById(int id) {
         
-        String deleted = userDao.deleteUserById(id);
+        Optional<Users> deleted = userDao.deleteUserById(id);
         
         ResponseStructure<String> responseStructure = new ResponseStructure<>();
 
@@ -114,7 +115,7 @@ public class UserService {
         } else {
             responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
             responseStructure.setMessage("Failed to delete the user");
-            responseStructure.setData("U with ID " + id + " not found");
+            responseStructure.setData("User with ID " + id + " not found");
             return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
         }
     }
