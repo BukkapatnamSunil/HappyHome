@@ -1,6 +1,9 @@
 package com.tyss.happyhome.entity;
 
+import java.sql.Date;
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,7 +28,8 @@ public class Document {
 	private String documnetType;
 	@Column(unique = true)
 	private String documnetNumber;
-	private LocalDate issueDate;
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "dd/MM/yyyy")
+	private Date issueDate;
 	//USER MAPPING
 	@ManyToOne
 	@JoinColumn(name="user_id")
