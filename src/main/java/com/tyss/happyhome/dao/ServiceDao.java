@@ -6,14 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tyss.happyhome.Repository.ServicesRepository;
+import com.tyss.happyhome.Repository.HappyHomeServicesRepository;
 import com.tyss.happyhome.entity.Service;
 
 @Repository
 public class ServiceDao {
 
 	@Autowired
-	private ServicesRepository servicesRepository;
+	private HappyHomeServicesRepository servicesRepository;
 	
 	public Service saveProperty(Service service) {
 		return servicesRepository.save(service);

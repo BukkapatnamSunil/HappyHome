@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.tyss.happyhome.entity.Property;
 
-public interface PropertyRepository extends JpaRepository<Property, Integer> {
+public interface HappyHomePropertyRepository extends JpaRepository<Property, Integer> {
 
 	public List<Property> findByType(String type);
 	public List<Property> findByCostGreaterThan(double cost);

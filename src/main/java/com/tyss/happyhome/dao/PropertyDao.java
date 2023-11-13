@@ -6,14 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.tyss.happyhome.Repository.PropertyRepository;
+import com.tyss.happyhome.Repository.HappyHomePropertyRepository;
 import com.tyss.happyhome.entity.Property;
 
 @Repository
 public class PropertyDao {
 	
 	@Autowired
-	private PropertyRepository propertyRepository;
+	private HappyHomePropertyRepository propertyRepository;
 	
 	public Property saveProperty(Property property) {
 		return propertyRepository.save(property);
