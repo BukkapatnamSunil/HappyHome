@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tyss.happyhome.Repository.HappyHomeUserRepository;
+import com.tyss.happyhome.Repository.HappyHomeAddressRepository;
+import com.tyss.happyhome.Repository.HappyHomeUsersRepository;
 import com.tyss.happyhome.entity.Service;
 import com.tyss.happyhome.entity.Users;
 
 @Repository
 public class UsersDao {
-	
 	@Autowired
-	private HappyHomeUserRepository userRepository;
+	private HappyHomeUsersRepository userRepository;
 	
 	//method to save user
 	public Users saveUser(Users users)
