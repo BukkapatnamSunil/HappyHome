@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tyss.happyhome.Repository.HappyHomeDocumentRepository;
-import com.tyss.happyhome.entity.Address;
 import com.tyss.happyhome.entity.Document;
 
 @RestController
