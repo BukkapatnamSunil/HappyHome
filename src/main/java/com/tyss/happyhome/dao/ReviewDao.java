@@ -54,15 +54,17 @@ public class ReviewDao {
 	}
 	
 	//method to delete review based on id
-	public String deleteReviewById(int id)
+	public Optional<Review> deleteReviewById(int id)
 	{
 		Optional<Review> opt = reviewRepository.findById(id);
 		if(opt.isPresent())
 		{
 			Review rev = opt.get();
+			rev.setList_services(null);
+			rev.setProperty(null);
 			reviewRepository.delete(rev);
-			return "Review"+id+"deleted successfully";
+			return opt;
 		}
-		return "No record found to delete";
+		return null;
 	}
 }
