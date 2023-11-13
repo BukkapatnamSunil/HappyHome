@@ -15,28 +15,23 @@ public class ServiceDao {
 	@Autowired
 	private HappyHomeServicesRepository servicesRepository;
 	
-	//save the Service
-	public Service saveService(Service service) {
+	public Service saveProperty(Service service) {
 		return servicesRepository.save(service);
 	}
 	
-	//update the Service
-	public Service updateService(Service service) {
+	public Service updateProperty(Service service) {
 		return servicesRepository.save(service);
 	}
 	
-	//delete the service
-	public void deleteService(Service service) {
+	public void deleteProperty(Service service) {
 		servicesRepository.delete(service);
 	}
 	
-	//delete the service by Id
-	public void deleteServiceById(int id) {
+	public void deletePropertyById(int id) {
 		servicesRepository.deleteById(id);
 	}
 	
-	//find the service by Id
-	public Service findByServiceId(int id) {
+	public Service findByPropertyId(int id) {
 		Optional<Service> optional=servicesRepository.findById(id);
 		if(optional.isPresent()) {
 			return optional.get();
@@ -45,13 +40,11 @@ public class ServiceDao {
 		}
 	}
 	
-	//find the service by Name Of the Service
 	public List<Service> findByNameOfTheService(String nameOfService){
 		return servicesRepository.findByNameOfTheService(nameOfService);
 	}
 	
-	//find the service by the direction
-	public List<Service> findByAvailability(String availability){
+	public List<Service> findPropertiesBydirection(String availability){
 		return servicesRepository.findByAvailability(availability);
 	}
 }

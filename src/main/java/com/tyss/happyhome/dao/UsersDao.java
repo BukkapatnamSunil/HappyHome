@@ -69,22 +69,6 @@ public class UsersDao {
 	}
 	
 	//method to delete user based on id
-
-//	public String deleteUserById(int id)
-//	{
-//		Optional<Users> opt = userRepository.findById(id);
-//		if(opt.isPresent())
-//		{
-//			Users us = opt.get();
-//			userRepository.delete(us);
-//			return "User id: "+id+" deleted successfully";
-//		}
-//		return "No record found to delete";
-//	}
-	
-	public void deleteUserById(int id) {
-		userRepository.deleteById(id);
-=======
 	public Optional<Users> deleteUserById(int id)
 	{
 		Optional<Users> opt = userRepository.findById(id);
@@ -101,6 +85,5 @@ public class UsersDao {
 			return opt;
 		}
 		return null;
-
 	}
 }
