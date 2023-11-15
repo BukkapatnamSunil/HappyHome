@@ -41,7 +41,7 @@ public class Document {
 	@JoinColumn(name="property_id")
 	private Property property;
 	//ADDRESS MAPPING
-	@Cascade({CascadeType.PERSIST,CascadeType.DELETE,CascadeType.MERGE})
+	@Cascade({CascadeType.ALL})
 	@OneToOne(mappedBy = "document")
 	private Address address;
 	

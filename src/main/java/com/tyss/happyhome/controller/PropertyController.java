@@ -16,6 +16,7 @@ import com.tyss.happyhome.dto.ResponseStructure;
 import com.tyss.happyhome.entity.Property;
 import com.tyss.happyhome.service.PropertyService;
 
+
 @RestController
 public class PropertyController {
 

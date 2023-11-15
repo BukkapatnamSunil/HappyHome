@@ -12,6 +12,7 @@ import com.tyss.happyhome.dao.ReviewDao;
 import com.tyss.happyhome.dto.ResponseStructure;
 import com.tyss.happyhome.entity.Review;
 import com.tyss.happyhome.exception.IdDoesNotFoundException;
+import com.tyss.happyhome.exception.Nullexception;
 
 @Service
 @Component
@@ -20,18 +21,40 @@ public class ReviewService {
 	@Autowired
 	private ReviewDao reviewDao;
 	
-	public ResponseEntity<ResponseStructure<Review>> saveReview(Review review)
+	
+	public ResponseEntity<ResponseStructure<Review>> saveReviewOfProperty(Review review,int id)
 	{
+		Review receivedReview = reviewDao.saveReviewOfProperty(review,id);
+		if(receivedReview!=null) {
+			ResponseStructure<Review> responseStructure = new ResponseStructure<Review>();
+			responseStructure.setStatusCode(201);
+			responseStructure.setMessage("Success");
+			responseStructure.setData(receivedReview);
+			
+			return new ResponseEntity<ResponseStructure<Review>>(responseStructure, HttpStatus.CREATED);
+		}
+		else {
+			throw new Nullexception();
+		}
 		
-		Review receivedReview = reviewDao.saveReview(review);
-		ResponseStructure<Review> responseStructure = new ResponseStructure<Review>();
-		responseStructure.setStatusCode(201);
-		responseStructure.setMessage("Success");
-		responseStructure.setData(receivedReview);
-		
-		return new ResponseEntity<ResponseStructure<Review>>(responseStructure, HttpStatus.CREATED);
 	}
 	
+	public ResponseEntity<ResponseStructure<Review>> saveReviewOfService(Review review,int id)
+	{
+		Review receivedReview = reviewDao.saveReviewOfService(review,id);
+		if(receivedReview!=null) {
+			ResponseStructure<Review> responseStructure = new ResponseStructure<Review>();
+			responseStructure.setStatusCode(201);
+			responseStructure.setMessage("Success");
+			responseStructure.setData(receivedReview);
+			
+			return new ResponseEntity<ResponseStructure<Review>>(responseStructure, HttpStatus.CREATED);
+		}
+		else {
+			throw new Nullexception();
+		}
+		
+	}
 	
 	public ResponseEntity<ResponseStructure<Review>> getReviewById(int id)
 	{

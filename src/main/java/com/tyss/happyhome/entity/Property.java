@@ -32,7 +32,7 @@ public class Property {
 	@JoinColumn(name="user_id")
 	private Users user;
 	//ADDRESS MAPPING
-	@Cascade({CascadeType.PERSIST,CascadeType.DELETE,CascadeType.MERGE})
+	@Cascade({CascadeType.ALL})
 	@OneToOne(mappedBy = "property")
 	private Address address;
 	//DOCUMENT MAPPING

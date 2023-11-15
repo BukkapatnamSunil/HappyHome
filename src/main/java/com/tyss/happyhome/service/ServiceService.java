@@ -10,6 +10,7 @@ import com.tyss.happyhome.dao.ServiceDao;
 import com.tyss.happyhome.dto.ResponseStructure;
 import com.tyss.happyhome.entity.Service;
 import com.tyss.happyhome.exception.IdDoesNotFoundException;
+import com.tyss.happyhome.exception.Nullexception;
 import com.tyss.happyhome.exception.PropertyTypeDoesnotFoundException;
 
 @org.springframework.stereotype.Service
@@ -18,13 +19,17 @@ public class ServiceService {
 	@Autowired
 	private ServiceDao serviceDao;
 
-	public ResponseEntity<ResponseStructure<com.tyss.happyhome.entity.Service>> saveService(Service service) {
-		Service recieveService = serviceDao.saveService(service);
-		ResponseStructure<Service> responseStructure = new ResponseStructure<Service>();
-		responseStructure.setStatusCode(HttpStatus.CREATED.value());
-		responseStructure.setMessage("Success");
-		responseStructure.setData(recieveService);
-		return new ResponseEntity<ResponseStructure<Service>>(responseStructure, HttpStatus.CREATED);
+	public ResponseEntity<ResponseStructure<com.tyss.happyhome.entity.Service>> saveService(Service service, int id) {
+		Service recieveService = serviceDao.saveService(service, id);
+		if (recieveService != null) {
+			ResponseStructure<Service> responseStructure = new ResponseStructure<Service>();
+			responseStructure.setStatusCode(HttpStatus.CREATED.value());
+			responseStructure.setMessage("Success");
+			responseStructure.setData(recieveService);
+			return new ResponseEntity<ResponseStructure<Service>>(responseStructure, HttpStatus.CREATED);
+		} else {
+			throw new Nullexception();
+		}
 	}
 
 	public ResponseEntity<ResponseStructure<Service>> updateService(Service property) {
@@ -75,7 +80,7 @@ public class ServiceService {
 			throw new PropertyTypeDoesnotFoundException("Service of : " + nameOfTheService + " doesnot Found ");
 		}
 	}
-	
+
 	public ResponseEntity<ResponseStructure<List<Service>>> findByAvailability(String availability) {
 		List<Service> services = serviceDao.findByAvailability(availability);
 		if (!services.isEmpty()) {

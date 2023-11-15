@@ -36,7 +36,7 @@ public class Users {
 	private long phno;
 	private Role role;
 	//ADDRESS MAPPING
-	@Cascade({CascadeType.PERSIST,CascadeType.DELETE,CascadeType.MERGE})
+	@Cascade({CascadeType.ALL})
 	@OneToOne(mappedBy = "user")
     private Address address;
 	//PROPERTY MAPPING
