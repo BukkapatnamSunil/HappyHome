@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tyss.happyhome.dto.ResponseStructure;
 import com.tyss.happyhome.entity.Address;
-import com.tyss.happyhome.entity.Review;
 import com.tyss.happyhome.service.AddressService;
 
 @RestController
@@ -49,12 +48,5 @@ public class AddressController {
 	{
 		return addressService.deleteAddressById(id);
 	}
-
-
-	
-
-
-
-	
 
 }

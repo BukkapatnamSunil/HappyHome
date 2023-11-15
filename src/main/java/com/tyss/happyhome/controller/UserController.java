@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tyss.happyhome.dto.ResponseStructure;
 import com.tyss.happyhome.entity.Users;
 import com.tyss.happyhome.service.UserService;
+import com.tyss.happyhome.utility.Role;
 
 
 @RestController
@@ -27,6 +28,18 @@ public class UserController {
 	public ResponseEntity<ResponseStructure<Users>> saveUser(@RequestBody Users user)
 	{
 		return userService.saveUser(user);
+	}
+	
+	@PutMapping("/users")
+	public ResponseEntity<ResponseStructure<Users>> updateUser(@RequestBody Users user)
+	{
+		return userService.updateUser(user);
+	}
+	
+	@DeleteMapping("/deleteUser/{id}")
+	public ResponseEntity<ResponseStructure<String>> deleteUserById(@PathVariable int id)
+	{
+		return userService.deleteUserById(id);
 	}
 	
 	@GetMapping("/users/{id}")
@@ -47,15 +60,16 @@ public class UserController {
 		return userService.getAllUsers();
 	}
 	
-	@PutMapping("/userUpdate")
-	public ResponseEntity<ResponseStructure<Users>> updateUser(@RequestBody Users user)
+	
+	@PutMapping("/users/{id}/{password}")
+	public ResponseEntity<ResponseStructure<Users>> updatePassword(@PathVariable int id,@PathVariable String password)
 	{
-		return userService.updateUser(user);
+		return userService.updatePassword(id,password);
 	}
 	
-	@DeleteMapping("/deleteUser/{id}")
-	public ResponseEntity<ResponseStructure<String>> deleteUserById(@PathVariable int id)
+	@GetMapping("/usersrole/{role}")
+	public ResponseEntity<ResponseStructure<List<Users>>> getUserRole(@PathVariable Role role)
 	{
-		return userService.deleteUserById(id);
+		return userService.findByRole(role);
 	}
 }

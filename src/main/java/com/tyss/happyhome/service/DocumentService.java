@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.tyss.happyhome.dao.DocumentDao;
 import com.tyss.happyhome.dto.ResponseStructure;
-import com.tyss.happyhome.entity.Address;
 import com.tyss.happyhome.entity.Document;
-import com.tyss.happyhome.exception.IdDoesNotFoundException;
 import com.tyss.happyhome.exception.Nullexception;
 
 @Service

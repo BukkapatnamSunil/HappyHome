@@ -13,6 +13,7 @@ import com.tyss.happyhome.dto.ResponseStructure;
 import com.tyss.happyhome.entity.Users;
 import com.tyss.happyhome.exception.EmailDoesNotFoundException;
 import com.tyss.happyhome.exception.IdDoesNotFoundException;
+import com.tyss.happyhome.utility.Role;
 
 @Service
 @Component
@@ -104,5 +105,36 @@ public class UserService {
 			throw new IdDoesNotFoundException("Id : " + id + " is not present : ");
 		}
 	}
+	
+	//Change the password
+	public ResponseEntity<ResponseStructure<Users>> updatePassword(int id,String password){
+		Users user=userDao.getUserById(id);
+		if (user != null) {
+			user.setPassword(password);
+			userDao.updateUser(user);
+			ResponseStructure<Users> responseStructure = new ResponseStructure<Users>();
+			responseStructure.setStatusCode(HttpStatus.OK.value());
+			responseStructure.setMessage("Success");
+			responseStructure.setData(user);
+			return new ResponseEntity<ResponseStructure<Users>>(responseStructure, HttpStatus.OK);
+		} else {
+			throw new IdDoesNotFoundException("Id : " + id + " is not present : ");
+		}
+	}
+	
+	//find the users by role
+	public ResponseEntity<ResponseStructure<List<Users>>> findByRole(Role role) {
+		List<Users> user = userDao.findByRole(role);
+		if (!user.isEmpty()) {
+			ResponseStructure<List<Users>> responseStructure = new ResponseStructure<List<Users>>();
+			responseStructure.setStatusCode(HttpStatus.OK.value());
+			responseStructure.setMessage("SUCCESS");
+			responseStructure.setData(user);
+
+			return new ResponseEntity<ResponseStructure<List<Users>>>(responseStructure, HttpStatus.CREATED);
+		} else {
+			throw new EmailDoesNotFoundException("Role: " + role + ", not present in DB");
+		}
+	}	
 	
 }

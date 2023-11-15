@@ -12,9 +12,5 @@ public interface HappyHomeServicesRepository  extends JpaRepository<Service, Int
 	public List<Service> findByNameOfTheService(String nameOfTheService);
 	public List<Service> findByAvailability(String availability);
 
-	List<Service> findByNameOfTheService(String nameOfService);
-
-	List<Service> findByAvailability(String availability);
-	
 
 }

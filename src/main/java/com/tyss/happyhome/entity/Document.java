@@ -1,7 +1,9 @@
 package com.tyss.happyhome.entity;
 
 import java.sql.Date;
-import java.time.LocalDate;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -39,6 +41,7 @@ public class Document {
 	@JoinColumn(name="property_id")
 	private Property property;
 	//ADDRESS MAPPING
+	@Cascade({CascadeType.PERSIST,CascadeType.DELETE,CascadeType.MERGE})
 	@OneToOne(mappedBy = "document")
 	private Address address;
 	

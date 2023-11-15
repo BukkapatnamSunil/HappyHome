@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.tyss.happyhome.Repository.HappyHomeUsersRepository;
 import com.tyss.happyhome.entity.Users;
+import com.tyss.happyhome.utility.Role;
 
 @Repository
 public class UsersDao {
@@ -82,5 +83,17 @@ public class UsersDao {
 	
 	public void deleteUserById(int id) {
 		userRepository.deleteById(id);
+	}
+	
+	
+	//method to find users by Role
+	public List<Users> findByRole(Role role)
+	{
+		List<Users> users = userRepository.findByRole(role);
+		if(!users.isEmpty())
+		{
+			return users;
+		}
+		return null;
 	}
 }
