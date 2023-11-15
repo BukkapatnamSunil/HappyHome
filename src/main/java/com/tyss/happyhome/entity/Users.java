@@ -2,6 +2,9 @@ package com.tyss.happyhome.entity;
 
 import java.util.List;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import com.tyss.happyhome.utility.Role;
 
 import jakarta.persistence.Column;
@@ -33,6 +36,7 @@ public class Users {
 	private long phno;
 	private Role role;
 	//ADDRESS MAPPING
+	@Cascade({CascadeType.ALL})
 	@OneToOne(mappedBy = "user")
     private Address address;
 	//PROPERTY MAPPING

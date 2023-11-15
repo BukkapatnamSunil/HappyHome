@@ -19,10 +19,10 @@ public class DocumentController {
 	@Autowired
 	private DocumentService documentservice;
 	//SAVE DOCUMENT
-	@PostMapping("/savedocument")
-	public ResponseEntity<ResponseStructure<Document>> saveDocument(@RequestBody Document document)
+	@PostMapping("/savedocument/{id}")
+	public ResponseEntity<ResponseStructure<Document>> saveDocument(@PathVariable(value = "id") int userId,@RequestBody Document document)
 	{
-		return documentservice.saveDocument(document);
+		return documentservice.saveDocument(userId,document);
 	}
 	//FIND BY ID
 	@GetMapping("/finddocumentbyid/{id}")

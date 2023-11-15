@@ -21,34 +21,36 @@ public class ServiceController {
 
 	@Autowired
 	private ServiceService service;
-	
-	@PostMapping("/service")
-	public ResponseEntity<ResponseStructure<Service>> saveService(@RequestBody Service property){
-		return service.saveService(property);
+
+	@PostMapping("/service/{id}")
+	public ResponseEntity<ResponseStructure<Service>> saveService(@RequestBody Service service2, @PathVariable int id) {
+		return service.saveService(service2, id);
 	}
-	
+
 	@PutMapping("/service")
-	public ResponseEntity<ResponseStructure<Service>> updateService(@RequestBody Service property){
+	public ResponseEntity<ResponseStructure<Service>> updateService(@RequestBody Service property) {
 		return service.updateService(property);
 	}
-	
+
 	@DeleteMapping("/service/{id}")
-	public ResponseEntity<ResponseStructure<Service>> deleteServiceById(@PathVariable int id){
+	public ResponseEntity<ResponseStructure<Service>> deleteServiceById(@PathVariable int id) {
 		return service.deleteService(id);
 	}
-	
+
 	@GetMapping("/findservice/{id}")
-	public ResponseEntity<ResponseStructure<Service>> findServiceById(@PathVariable int id){
+	public ResponseEntity<ResponseStructure<Service>> findServiceById(@PathVariable int id) {
 		return service.findServiceById(id);
 	}
-	
+
 	@GetMapping("/service/{nameOfTheService}")
-	public ResponseEntity<ResponseStructure<List<Service>>> findServiceByNameOfTheService(@PathVariable String nameOfTheService){
+	public ResponseEntity<ResponseStructure<List<Service>>> findServiceByNameOfTheService(
+			@PathVariable String nameOfTheService) {
 		return service.findByNameOfTheService(nameOfTheService);
 	}
-	
+
 	@GetMapping("/services/{availability}")
-	public ResponseEntity<ResponseStructure<List<Service>>> findServiceByAvaialability(@PathVariable String availability){
+	public ResponseEntity<ResponseStructure<List<Service>>> findServiceByAvaialability(
+			@PathVariable String availability) {
 		return service.findByAvailability(availability);
 	}
 

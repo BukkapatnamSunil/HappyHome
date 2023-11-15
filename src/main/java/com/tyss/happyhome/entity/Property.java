@@ -2,6 +2,9 @@ package com.tyss.happyhome.entity;
 
 import java.util.List;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +32,7 @@ public class Property {
 	@JoinColumn(name="user_id")
 	private Users user;
 	//ADDRESS MAPPING
+	@Cascade({CascadeType.ALL})
 	@OneToOne(mappedBy = "property")
 	private Address address;
 	//DOCUMENT MAPPING

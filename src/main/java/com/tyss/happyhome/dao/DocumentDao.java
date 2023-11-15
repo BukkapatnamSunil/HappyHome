@@ -13,45 +13,41 @@ import com.tyss.happyhome.entity.Document;
 public class DocumentDao {
 	@Autowired
 	private HappyHomeDocumentRepository documenetRepository;
-	
-	//save documnet
-	public Document saveDocument(Document document)
-	{
+
+	// save documnet
+	public Document saveDocument(Document document) {
 		return documenetRepository.save(document);
 	}
-	//find document object  by id
-	public Document findById(int id)
-	{
+
+	// find document object by id
+	public Document findById(int id) {
 		Optional<Document> opt = documenetRepository.findById(id);
-		if(opt.isPresent())
-		{
+		if (opt.isPresent()) {
 			return opt.get();
 		}
 		return null;
 	}
-	//return list of documents
-	public List<Document> getAllDocuments()
-	{
+
+	// return list of documents
+	public List<Document> getAllDocuments() {
 		List<Document> list = documenetRepository.findAll();
 		return list;
 	}
-	//delete document
-	public Optional<Document> deleteDocument(int id)
-	{
+
+	// delete document
+	public String deleteDocument(int id) {
 		Optional<Document> opt = documenetRepository.findById(id);
-		if(opt.isPresent())
-		{
-		Document add = opt.get();
+		if (opt.isPresent()) {
+			Document add = opt.get();
 			documenetRepository.delete(add);
-			return opt;
+			return "Document of " + id + " is being deleted successfully";
 		}
-		return null;
+		return "No record found ";
 	}
-	//update Document
-		public Document updateDocument(Document document)
-		{
-			return documenetRepository.save(document);
-		}
-	
+
+	// update Document
+	public Document updateDocumnet(Document document) {
+		return documenetRepository.save(document);
+	}
 
 }

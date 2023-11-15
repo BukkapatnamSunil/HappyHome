@@ -3,6 +3,13 @@ package com.tyss.happyhome.entity;
 
 import java.util.List;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.springframework.http.ResponseEntity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tyss.happyhome.dto.ResponseStructure;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +18,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 //LAMBOK ANNOTATIONS FOR GETTERS AND SETTERS
@@ -33,8 +41,10 @@ public class Service {
 	@JoinTable(joinColumns = @JoinColumn(name="service_id"),inverseJoinColumns =@JoinColumn(name="user_id") )
 	private List<Users> list_user;
 	//REVIEW MAPPING
-	@ManyToMany
-	@JoinTable(joinColumns = @JoinColumn(name="service_id"),inverseJoinColumns = @JoinColumn(name="review_id"))
+	@JsonIgnore
+	@OneToMany(mappedBy = "service")
+	@Cascade(CascadeType.DELETE)
 	private List<Review> list_review;
+	
 	
 }

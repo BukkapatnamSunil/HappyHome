@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import com.tyss.happyhome.dao.AddressDao;
 import com.tyss.happyhome.dto.ResponseStructure;
 import com.tyss.happyhome.entity.Address;
-import com.tyss.happyhome.exception.IdDoesNotFoundException;
 import com.tyss.happyhome.exception.Nullexception;
 
 @Service
@@ -95,7 +94,7 @@ public class AddressService {
 	//DELETE ADDRESS BY ID SERVICE METHOD
 	public ResponseEntity<ResponseStructure<String>> deleteAddressById(int id)
 	{
-		Optional<Address> result=ad.deleteAddressById(id);
+		String result=ad.deleteAddressById(id);
         ResponseStructure<String> responseStructure = new ResponseStructure<>();
 
 		 if (result!=null) {

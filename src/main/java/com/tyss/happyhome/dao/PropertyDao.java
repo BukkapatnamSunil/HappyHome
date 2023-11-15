@@ -64,5 +64,7 @@ public class PropertyDao {
 	public List<Property> findPropertiesByCostLessThan(double cost){
 		return propertyRepository.findByCostLessThan(cost);
 	}
+	
+	
 
 }

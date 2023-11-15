@@ -119,4 +119,6 @@ public class PropertyService {
 			throw new PropertyTypeDoesnotFoundException("Cost : "+cost+" less than doesnot Found ");
 		}
 	}
+	
+
 }

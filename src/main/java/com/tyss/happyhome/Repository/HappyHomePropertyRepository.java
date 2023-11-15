@@ -12,4 +12,5 @@ public interface HappyHomePropertyRepository extends JpaRepository<Property, Int
 	public List<Property> findByCostGreaterThan(double cost);
 	public List<Property> findByCostLessThan(double cost);
 	public List<Property> findByDirection(String direction);
+	
 }

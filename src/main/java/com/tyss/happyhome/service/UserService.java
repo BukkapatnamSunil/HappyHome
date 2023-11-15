@@ -1,7 +1,6 @@
 package com.tyss.happyhome.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +13,7 @@ import com.tyss.happyhome.dto.ResponseStructure;
 import com.tyss.happyhome.entity.Users;
 import com.tyss.happyhome.exception.EmailDoesNotFoundException;
 import com.tyss.happyhome.exception.IdDoesNotFoundException;
+import com.tyss.happyhome.utility.Role;
 
 @Service
 @Component
@@ -105,54 +105,36 @@ public class UserService {
 			throw new IdDoesNotFoundException("Id : " + id + " is not present : ");
 		}
 	}
-	
 
-    public ResponseEntity<ResponseStructure<List<Users>>> getAllUsers() {
-		
-        List<Users> users = userDao.getAllUsers();
+	// Change the password
+	public ResponseEntity<ResponseStructure<Users>> updatePassword(int id, String password) {
+		Users user = userDao.getUserById(id);
+		if (user != null) {
+			user.setPassword(password);
+			userDao.updateUser(user);
+			ResponseStructure<Users> responseStructure = new ResponseStructure<Users>();
+			responseStructure.setStatusCode(HttpStatus.OK.value());
+			responseStructure.setMessage("Success");
+			responseStructure.setData(user);
+			return new ResponseEntity<ResponseStructure<Users>>(responseStructure, HttpStatus.OK);
+		} else {
+			throw new IdDoesNotFoundException("Id : " + id + " is not present : ");
+		}
+	}
 
-        ResponseStructure<List<Users>> responseStructure = new ResponseStructure<>();
-        responseStructure.setStatusCode(HttpStatus.OK.value());
-        responseStructure.setMessage("Reviews retrieved successfully");
-        responseStructure.setData(users);
+	// find the users by role
+	public ResponseEntity<ResponseStructure<List<Users>>> findByRole(Role role) {
+		List<Users> user = userDao.findByRole(role);
+		if (!user.isEmpty()) {
+			ResponseStructure<List<Users>> responseStructure = new ResponseStructure<List<Users>>();
+			responseStructure.setStatusCode(HttpStatus.OK.value());
+			responseStructure.setMessage("SUCCESS");
+			responseStructure.setData(user);
 
-        return new ResponseEntity<ResponseStructure<List<Users>>>(responseStructure, HttpStatus.OK);
-    }
-    
-    public ResponseEntity<ResponseStructure<Users>> updateUser(Users user) {
-        
-        Users updated = userDao.updateUser(user);
+			return new ResponseEntity<ResponseStructure<List<Users>>>(responseStructure, HttpStatus.CREATED);
+		} else {
+			throw new EmailDoesNotFoundException("Role: " + role + ", not present in DB");
+		}
+	}
 
-        ResponseStructure<Users> responseStructure = new ResponseStructure<Users>();
-        
-        if (updated != null) {
-            responseStructure.setStatusCode(HttpStatus.OK.value());
-            responseStructure.setMessage("User updated successfully");
-            responseStructure.setData(updated);
-            return new ResponseEntity<ResponseStructure<Users>>(responseStructure, HttpStatus.OK);
-        } else {
-            responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
-            responseStructure.setMessage("Failed to update the user");
-            return new ResponseEntity<ResponseStructure<Users>>(responseStructure, HttpStatus.NOT_FOUND);
-        }
-    }
-    
-     public ResponseEntity<ResponseStructure<String>> deleteUserById(int id) {
-        
-        Optional<Users> deleted = userDao.deleteUserById(id);
-        
-        ResponseStructure<String> responseStructure = new ResponseStructure<>();
-
-        if (deleted!=null) {
-            responseStructure.setStatusCode(HttpStatus.OK.value());
-            responseStructure.setMessage("User deleted successfully");
-            responseStructure.setData("User with ID " + id + " has been deleted");
-            return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.OK);
-        } else {
-            responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
-            responseStructure.setMessage("Failed to delete the user");
-            responseStructure.setData("User with ID " + id + " not found");
-            return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.NOT_FOUND);
-        }
-    }
 }

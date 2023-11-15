@@ -1,13 +1,12 @@
 package com.tyss.happyhome.entity;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,10 +21,12 @@ public class Review {
 	private String description;
 	//PROPERTY MAPPING
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name="property_id")
 	private Property property;
 	
 	// SERVICE MAPPING 
-	@ManyToMany(mappedBy = "list_review")
-	private List<Service> list_services;
+	@ManyToOne
+	@JoinColumn(name="my_review_Id")
+	private Service service;
 }
