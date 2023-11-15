@@ -19,8 +19,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 //LAMBOK ANNOTATIONS FOR GETTERS AND SETTERS
-@Setter
 @Getter
+@Setter
 @Entity
 public class Document {
 	
@@ -30,7 +30,9 @@ public class Document {
 	private String documnetType;
 	@Column(unique = true)
 	private String documnetNumber;
-	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern = "dd/MM/yyyy")
+
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date issueDate;
 	//USER MAPPING
 	@ManyToOne

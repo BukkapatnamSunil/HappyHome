@@ -105,10 +105,10 @@ public class UserService {
 			throw new IdDoesNotFoundException("Id : " + id + " is not present : ");
 		}
 	}
-	
-	//Change the password
-	public ResponseEntity<ResponseStructure<Users>> updatePassword(int id,String password){
-		Users user=userDao.getUserById(id);
+
+	// Change the password
+	public ResponseEntity<ResponseStructure<Users>> updatePassword(int id, String password) {
+		Users user = userDao.getUserById(id);
 		if (user != null) {
 			user.setPassword(password);
 			userDao.updateUser(user);
@@ -121,8 +121,8 @@ public class UserService {
 			throw new IdDoesNotFoundException("Id : " + id + " is not present : ");
 		}
 	}
-	
-	//find the users by role
+
+	// find the users by role
 	public ResponseEntity<ResponseStructure<List<Users>>> findByRole(Role role) {
 		List<Users> user = userDao.findByRole(role);
 		if (!user.isEmpty()) {
@@ -135,6 +135,6 @@ public class UserService {
 		} else {
 			throw new EmailDoesNotFoundException("Role: " + role + ", not present in DB");
 		}
-	}	
-	
+	}
+
 }

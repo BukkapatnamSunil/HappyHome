@@ -72,32 +72,18 @@ public class ReviewDao {
 		return reviewRepository.save(review);
 	}
 
-	// method to delete review based on id
-//	public String deleteReviewById(int id) {
-//		Optional<Review> opt = reviewRepository.findById(id);
-//		if (opt.isPresent()) {
-//			Review rev = opt.get();
-//			reviewRepository.delete(rev);
-//			return "Review" + id + "deleted successfully";
-//		}
-//		return "No record found to delete";
-//	}
-	
+
 	// method to delete review based on id
 		public String deleteReviewById(int id) {
 			Optional<Review> opt = reviewRepository.findById(id);
 			if (opt.isPresent()) {
 				Review rev = opt.get();
-//				List<Service> services=rev.getList_services();
-//				if(!services.isEmpty()) {
-//					for(Service service:services) {
-//						service.setList_review(null);
-//						serviceDao.updateService(service);
-//					}
-//				}
 				reviewRepository.delete(rev);
 				return "Review" + id + "deleted successfully";
 			}
 			return "No record found to delete";
 		}
+
+	
+
 }

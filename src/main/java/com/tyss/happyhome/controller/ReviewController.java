@@ -23,11 +23,13 @@ public class ReviewController {
 	private ReviewService reviewService;
 	
 	
+
 	@PostMapping("/propertyreviews/{id}")
 	public ResponseEntity<ResponseStructure<Review>> saveReviewOfProperty(@PathVariable(value = "id") int id,@RequestBody Review review)
 	{
 		return reviewService.saveReviewOfProperty(review,id);
 	}
+	
 	
 	@PostMapping("/servicereviews/{id}")
 	public ResponseEntity<ResponseStructure<Review>> saveReviewOfService(@PathVariable(value = "id") int id,@RequestBody Review review)
@@ -35,7 +37,7 @@ public class ReviewController {
 		return reviewService.saveReviewOfService(review,id);
 	}
 	
-	@GetMapping("/reviews/{id}")
+	@GetMapping("/reviewsId/{id}")
 	public ResponseEntity<ResponseStructure<Review>> getReview(@PathVariable int id)
 	{
 		return reviewService.getReviewById(id);

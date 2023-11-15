@@ -94,7 +94,7 @@ public class AddressService {
 	//DELETE ADDRESS BY ID SERVICE METHOD
 	public ResponseEntity<ResponseStructure<String>> deleteAddressById(int id)
 	{
-		Optional<Address> result=ad.deleteAddressById(id);
+		String result=ad.deleteAddressById(id);
         ResponseStructure<String> responseStructure = new ResponseStructure<>();
 
 		 if (result!=null) {

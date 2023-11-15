@@ -1,7 +1,6 @@
 package com.tyss.happyhome.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,17 +19,16 @@ public class DocumentService {
 	@Autowired
 	private DocumentDao documentdao;
 
-
 	// SAVE DOCUMENT IN SERVICE LAYER
 	public ResponseEntity<ResponseStructure<Document>> saveDocument(int userId, Document document) {
-		Document doc=documentdao.saveDocument(document, userId);
-		if(doc!=null) {
-		ResponseStructure<Document> response = new ResponseStructure<>();
-		response.setStatusCode(HttpStatus.OK.value());
-		response.setMessage("Success");
-		response.setData(doc);
-		return new ResponseEntity<ResponseStructure<Document>>(HttpStatus.OK);
-		}else {
+		Document doc = documentdao.saveDocument(document);
+		if (doc != null) {
+			ResponseStructure<Document> response = new ResponseStructure<>();
+			response.setStatusCode(HttpStatus.OK.value());
+			response.setMessage("Success");
+			response.setData(doc);
+			return new ResponseEntity<ResponseStructure<Document>>(HttpStatus.OK);
+		} else {
 			throw new Nullexception();
 		}
 	}
@@ -74,7 +72,7 @@ public class DocumentService {
 
 	// DELETE DOCUMENT IN SERVICE LAYER
 	public ResponseEntity<ResponseStructure<String>> deleteDocumentById(int id) {
-		Optional<Document> result = documentdao.deleteDocument(id);
+		String result = documentdao.deleteDocument(id);
 		ResponseStructure<String> responseStructure = new ResponseStructure<>();
 
 		if (result != null) {
@@ -92,7 +90,7 @@ public class DocumentService {
 
 	// UPADTE DOCUMENT IN SERVICE LAYER<
 	public ResponseEntity<ResponseStructure<Document>> updateDocument(Document document) {
-		Document doc = documentdao.updateDocument(document);
+		Document doc = documentdao.updateDocumnet(document);
 		if (doc != null) {
 			ResponseStructure<Document> response = new ResponseStructure<>();
 			response.setStatusCode(HttpStatus.FOUND.value());
